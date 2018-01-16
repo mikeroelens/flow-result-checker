@@ -27,18 +27,18 @@ module.exports = () => {
     .option('--no-color')
     .option('--debugging')
     .option(
-      '-d, --dir <dir>',
-      'The directory where to save the flow result and errors. If not specified no files will be saved.'
+    '-d, --dir <dir>',
+    'The directory where to save the flow result and errors. If not specified no files will be saved.'
     )
     .option(
-      '-f, --file <filename>',
-      `Name of the result file. defaults to '${defaultOptions.file}'`,
-      defaultOptions.file
+    '-f, --file <filename>',
+    `Name of the result file. defaults to '${defaultOptions.file}'`,
+    defaultOptions.file
     )
     .option(
-      '-e, --error-file <filename>',
-      `Name of the file where parsing errors are stored. defaults to '${defaultOptions.errorFile}'`,
-      defaultOptions.errorFile
+    '-e, --error-file <filename>',
+    `Name of the file where parsing errors are stored. defaults to '${defaultOptions.errorFile}'`,
+    defaultOptions.errorFile
     )
     .parse(process.argv)
 
@@ -74,7 +74,7 @@ module.exports = () => {
           .replace(/\n*Found.*errors?\n/, '')
           .replace(/\n*No errors!\n/, '')
           .split(/\n\n/)
-          .filter(line => line && !line.includes('Error: node_modules'))
+          .filter(line => line && !line.startsWith('node_modules') && !line.includes('Error: node_modules'))
 
         if (result.length > 0) {
           console.log(`
